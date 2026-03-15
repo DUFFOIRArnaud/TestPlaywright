@@ -22,6 +22,17 @@ export class RegisterPage {
     readonly passwordInput: Locator;
     readonly repeatedPasswordInput: Locator;
     readonly registerButton: Locator;
+    //Erreurs d'inscription
+    readonly firstNameError: Locator;
+    readonly lastNameError: Locator;
+    readonly adressError: Locator;
+    readonly cityError: Locator
+    readonly stateError: Locator;
+    readonly zipCodeError: Locator
+    readonly ssnError: Locator;
+    readonly usernameError: Locator;
+    readonly passwordError: Locator;
+    readonly repeatedPasswordError: Locator;
     readonly userAlreadyExistsError: Locator;
 
     //Le constructeur initialise les propriétés de la classe en utilisant les sélecteurs appropriés pour localiser les éléments de la page d'inscription.
@@ -39,6 +50,18 @@ export class RegisterPage {
         this.passwordInput = page.locator('#customer\\.password');
         this.repeatedPasswordInput = page.locator('#repeatedPassword');
         this.registerButton = page.getByRole('button', { name: 'Register' });
+
+        //Erreurs d'inscription
+        this.firstNameError = page.locator('#customer\\.firstName\\.errors');
+        this.lastNameError = page.locator('#customer\\.lastName\\.errors');
+        this.adressError = page.locator('#customer\\.address\\.street\\.errors');
+        this.cityError = page.locator('#customer\\.address\\.city\\.errors');
+        this.stateError = page.locator('#customer\\.address\\.state\\.errors');
+        this.zipCodeError = page.locator('#customer\\.address\\.zipCode\\.errors');
+        this.ssnError = page.locator('#customer\\.ssn\\.errors');
+        this.usernameError = page.locator('#customer\\.username\\.errors');
+        this.passwordError = page.locator('#customer\\.password\\.errors');
+        this.repeatedPasswordError = page.locator('#repeatedPassword\\.errors');
         this.userAlreadyExistsError = page.locator('#customer\\.username\\.errors');
     } 
 
@@ -88,5 +111,18 @@ export class RegisterPage {
             await expect(headerText.includes('Welcome ' + username)).toBe(true);
             await expect(rightPanelText.includes('Your account was created successfully. You are now logged in.')).toBe(true);
         }
+    }
+
+    async verifyErrorMessages() {
+        await expect(this.firstNameError).toBeVisible();
+        await expect(this.lastNameError).toBeVisible();
+        await expect(this.adressError).toBeVisible();
+        await expect(this.cityError).toBeVisible();
+        await expect(this.stateError).toBeVisible();
+        await expect(this.zipCodeError).toBeVisible();
+        await expect(this.ssnError).toBeVisible();
+        await expect(this.usernameError).toBeVisible();
+        await expect(this.passwordError).toBeVisible();
+        await expect(this.repeatedPasswordError).toBeVisible();
     }
 }
