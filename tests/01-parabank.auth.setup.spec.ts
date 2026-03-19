@@ -43,7 +43,6 @@ test('Register at Parabank', async ({ page }) => {
       break;
     } catch (error) {
       const err = error as Error;
-      console.log(`Attempt ${i + 1} failed: ${err.message}`);
       if (i === MAX_REGISTRATION_ATTEMPTS - 1) {
         throw error; // Lancer l'erreur après la dernière tentative échouée
       }

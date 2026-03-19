@@ -17,6 +17,8 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Create auth directory
+      run: mkdir -p playwright/.auth 
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
